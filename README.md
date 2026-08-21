@@ -20,14 +20,14 @@ Designed and developed an end-to-end executive Call Center KPI Dashboard using M
 * Handled missing values, standardized datetime formats, and performed schema transformations for analysis.
 
 **2. Data Modeling & Advanced Calculations (Power Pivot & DAX)**
-* Built dynamic DAX Measures for weighted KPIs to avoid "average of averages" calculation errors.
-* Developed custom formulas for key operational metrics:
+* **Data Warehouse Architecture:** Designed a **Snowflake Schema** in Power Pivot, connecting Fact tables (Call Logs) with Dimension tables (Agents, Team Leaders, Managers, Time/Dates) to ensure efficient data relationships and star-to-snowflake normalization.
+* **Dynamic DAX Measures:** Built custom measures for weighted KPIs to prevent "average of averages" calculation errors:
   * **Answer Rate & Abandoned Rate:** Evaluated overall volume handling.
   * **Service Level %:** Measured percentage of calls answered within 20 seconds.
-  * **Average Handle Time (AHT) & ASA:** Calculated average durations using sum-based logic.
-  * **Satisfaction Score (CSAT):** Weighted ratings based on unique survey responses.
-  * **Overall Weighted KPI Score:** Combined weighted metrics (35% CSAT, 30% AHT, 20% Answered, 15% ASA) into a single performance index.
-
+  * **Average Handle Time (AHT) & ASA:** Calculated average durations using sum-based duration logic.
+  * **Satisfaction Score (CSAT):** Calculated weighted ratings based on unique survey responses.
+  * **Overall Weighted KPI Score:** Combined weighted metrics (35% CSAT, 30% AHT, 20% Answered, 15% ASA) into a single unified performance index.
+    
 **3. Interactive Visual Design & UI/UX**
 * Built custom KPI cards using grouped dynamic text boxes linked directly to Pivot measures.
 * Integrated custom formatting (`mm"m":ss"s"`, `00"s"`) to present time-based variables accurately.
