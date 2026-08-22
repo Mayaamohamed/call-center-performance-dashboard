@@ -19,15 +19,19 @@ Designed and developed an end-to-end executive Call Center KPI Dashboard using M
 * Cleaned and structured raw call log datasets using Power Query.
 * Handled missing values, standardized datetime formats, and performed schema transformations for analysis.
 
-**2. Data Modeling & Advanced Calculations (Power Pivot & DAX)**
-* **Data Warehouse Architecture:** Designed a **Snowflake Schema** in Power Pivot, connecting Fact tables (Call Logs) with Dimension tables (Agents, Team Leaders, Managers, Time/Dates) to ensure efficient data relationships and star-to-snowflake normalization.
+**2. Data Modeling & Data Warehouse Architecture (Power Pivot & DAX)**
+* **Snowflake Data Model:** Designed an optimized data model in Power Pivot establishing 1-to-many (`1:*`) relationships between dimension tables and fact tables:
+  * **`Call_Log` (Fact Table):** Contains transactional call metrics (Incoming/Answered Calls, Talk/Hold/Handle Durations, Answer Speed, Waiting Time, Service Level). Linked to `Calendar` via `Date` (`* : 1`) and to `Roster` via `AgentID` (`* : 1`).
+  * **`CSAT` (Fact Table):** Stores customer satisfaction survey responses (Rating, Rating Status, Category, Sub-category). Linked to `Calendar` via `Date` (`* : 1`) and to `Roster` via `AgentID` (`* : 1`).
+  * **`Roster` (Dimension Table):** Serves as the central agent reference, mapping `Agent_Id` and `Agent_name` to organizational structures including `Team Leader [TL]`, `Manager`, `Tenure Bucket`, and `Agent Shift`.
+  * **`Calendar` (Dimension Table):** Provides date intelligence hierarchy with fields for `Date`, `Week`, `Month-Year`, `Quarter`, and `Year`.
 * **Dynamic DAX Measures:** Built custom measures for weighted KPIs to prevent "average of averages" calculation errors:
   * **Answer Rate & Abandoned Rate:** Evaluated overall volume handling.
   * **Service Level %:** Measured percentage of calls answered within 20 seconds.
   * **Average Handle Time (AHT) & ASA:** Calculated average durations using sum-based duration logic.
   * **Satisfaction Score (CSAT):** Calculated weighted ratings based on unique survey responses.
   * **Overall Weighted KPI Score:** Combined weighted metrics (35% CSAT, 30% AHT, 20% Answered, 15% ASA) into a single unified performance index.
-    
+
 **3. Interactive Visual Design & UI/UX**
 * Built custom KPI cards using grouped dynamic text boxes linked directly to Pivot measures.
 * Integrated custom formatting (`mm"m":ss"s"`, `00"s"`) to present time-based variables accurately.
